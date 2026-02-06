@@ -1,0 +1,76 @@
+/* Base Styles */
+:root {
+    --primary: #2563eb;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --border: #e2e8f0;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+/* Header & Nav */
+.app-header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
+.nav-link { 
+    background: none; border: none; padding: 10px 15px; cursor: pointer; 
+    font-size: 1rem; color: var(--dark); 
+}
+.nav-link.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+/* Grid Layout */
+.main-wrapper { padding: 40px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+.devices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Card Style  */
+.device-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.device-title { font-size: 1.25rem; margin-bottom: 10px; color: var(--primary); }
+.device-detail { font-size: 0.9rem; color: #64748b; margin-bottom: 8px; }
+.device-detail b { color: var(--dark); }
+
+.status-label {
+    margin-top: auto;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    width: fit-content;
+}
+
+.status-fixed { background: #dcfce7; color: #166534; }
+.status-pending { background: #fef9c3; color: #854d0e; }
