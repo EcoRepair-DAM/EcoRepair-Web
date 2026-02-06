@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Repair Manager(ECOREPAIR)</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="root">
+        <header class="app-header">
+            <div class="nav-container">
+                <div class="logo">ECOREPAIR</div>
+                <nav class="main-nav">
+                    <button id="btn-home" class="nav-link">Home</button>
+                    <button id="btn-add" class="nav-link active">Add Device</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-wrapper">
+            <div class="container">
+                <div class="page-info">
+                    <h2>Technical Service Dashboard</h2>
+                    <p>Manage devices and repair status</p>
+                </div>
+
+                <div id="devices-grid" class="devices-grid">
+                    <p class="status-msg">Loading data from API...</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 Technical Support Management</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
