@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Repair Manager(ECOREPAIR)</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>Tech Manager - Devices & Repairs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="root">
@@ -12,8 +12,8 @@
             <div class="nav-container">
                 <div class="logo">ECOREPAIR</div>
                 <nav class="main-nav">
-                    <button id="btn-home" class="nav-link">Home</button>
-                    <button id="btn-add" class="nav-link active">Add Device</button>
+                    <button id="nav-devices" class="nav-link active">Devices Inventory</button>
+                    <button id="nav-repairs" class="nav-link">Repair Records</button>
                 </nav>
             </div>
         </header>
@@ -21,18 +21,33 @@
         <main class="main-wrapper">
             <div class="container">
                 <div class="page-info">
-                    <h2>Technical Service Dashboard</h2>
-                    <p>Manage devices and repair status</p>
+                    <h2 id="view-title">Technical Service Dashboard</h2>
+                    <p id="view-desc">Managing all registered hardware devices</p>
                 </div>
 
-                <div id="devices-grid" class="devices-grid">
-                    <p class="status-msg">Loading data from API...</p>
+                <div class="filters-container">
+                    <input type="text" id="search-input" placeholder="Search by name...">
+                    
+                    <select id="property-filter">
+                        <option value="all">All Status</option>
+                        <option value="true">Reusable / Finished</option>
+                        <option value="false">Single Use / Pending</option>
+                    </select>
+
+                    <select id="sort-select">
+                        <option value="asc">Name ASC (A-Z)</option>
+                        <option value="desc">Name DESC (Z-A)</option>
+                    </select>
+                </div>
+
+                <div id="main-grid" class="main-grid">
+                    <p class="status-msg">Loading data...</p>
                 </div>
             </div>
         </main>
 
         <footer class="app-footer">
-            <p>&copy; 2026 Technical Support Management</p>
+            <p>&copy; 2026 Technical Support Management - EcoRepair</p>
         </footer>
     </div>
 
