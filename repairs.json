@@ -1,0 +1,4 @@
+[
+  {"id": 101, "description": "Screen replacement", "cost": 90.00, "repairDate": "2024-02-10", "deviceId": 1, "repair": true},
+  {"id": 102, "description": "Port cleaning", "cost": 15.50, "repairDate": "2024-02-12", "deviceId": 2, "repair": false}
+]
