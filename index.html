@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Manager - Devices & Repairs</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="root">
@@ -23,6 +23,21 @@
                 <div class="page-info">
                     <h2 id="view-title">Technical Service Dashboard</h2>
                     <p id="view-desc">Managing all registered hardware devices</p>
+                </div>
+
+                <div class="filters-container">
+                    <input type="text" id="search-input" placeholder="Search by name...">
+                    
+                    <select id="property-filter">
+                        <option value="all">All Status</option>
+                        <option value="true">Reusable / Finished</option>
+                        <option value="false">Single Use / Pending</option>
+                    </select>
+
+                    <select id="sort-select">
+                        <option value="asc">Name ASC (A-Z)</option>
+                        <option value="desc">Name DESC (Z-A)</option>
+                    </select>
                 </div>
 
                 <div id="main-grid" class="main-grid">

@@ -1,88 +1,50 @@
-// URL de los archivos de prueba
-const DEVICES_URL = "./devices.json";
-const REPAIRS_URL = "./repairs.json";
+const API_URL = "./devices.json"; 
 
-// Al cargar la web
-document.addEventListener('DOMContentLoaded', () => {
-    // Escuchar clicks en el menú
-    document.getElementById('nav-devices').onclick = (e) => showView(e, 'devices');
-    document.getElementById('nav-repairs').onclick = (e) => showView(e, 'repairs');
+document.addEventListener('DOMContentLoaded', fetchDevices);
 
-    // Cargar dispositivos por defecto
-    loadData('devices');
-});
-
-function showView(event, view) {
-    // Actualizar botones del menú
-    document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-
-    // Actualizar textos
-    const title = document.getElementById('view-title');
-    const desc = document.getElementById('view-desc');
-
-    if (view === 'devices') {
-        title.innerText = "Devices Inventory";
-        desc.innerText = "Managing hardware components and stock";
-        loadData('devices');
-    } else {
-        title.innerText = "Technical Repairs";
-        desc.innerText = "Tracking costs and repair statuses";
-        loadData('repairs');
-    }
-}
-
-async function loadData(type) {
-    const grid = document.getElementById('main-grid');
-    grid.innerHTML = "<p>Loading...</p>";
+async function fetchDevices() {
+    const grid = document.getElementById('devices-grid');
+    grid.innerHTML = "<p>Loading hardware components...</p>";
 
     try {
-        const url = type === 'devices' ? DEVICES_URL : REPAIRS_URL;
-        const response = await fetch(url);
-        const data = await response.json();
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        
+        grid.innerHTML = ""; 
 
-        grid.innerHTML = ""; // Limpiar grid
+        data.forEach(device => {
+            const card = document.createElement('div');
+            card.className = 'device-card';
 
-        if (type === 'devices') {
-            renderDevices(data, grid);
-        } else {
-            renderRepairs(data, grid);
-        }
-    } catch (error) {
-        grid.innerHTML = "<p style='color:red'>Error loading data. Check if JSON files exist.</p>";
+            // Name
+            const name = document.createElement('h3');
+            name.className = 'device-name';
+            name.innerText = device.name;
+
+            // Brand & Type Row
+            const details = document.createElement('div');
+            details.className = 'device-info';
+            details.innerHTML = `<span><b>Brand:</b> ${device.brand}</span> <span><b>Type:</b> ${device.type}</span>`;
+
+            // Purchase Date
+            const date = document.createElement('p');
+            date.className = 'date-badge';
+            date.innerText = `Purchased: ${new Date(device.purchaseDate).toLocaleDateString()}`;
+
+            // Reusable Status
+            const status = document.createElement('span');
+            status.className = `reusable-tag ${device.reusable ? 'is-reusable' : 'not-reusable'}`;
+            status.innerText = device.reusable ? "REUSABLE COMPONENT" : "SINGLE USE ONLY";
+
+            // Assembly
+            card.appendChild(name);
+            card.appendChild(details);
+            card.appendChild(date);
+            card.appendChild(status);
+            
+            grid.appendChild(card);
+        });
+    } catch (e) {
+        grid.innerHTML = "<p style='color:red;'>Error loading device data.</p>";
     }
-}
-
-function renderDevices(data, container) {
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'device-card';
-        card.innerHTML = `
-            <h3 class="device-name">${item.name}</h3>
-            <span class="label"><b>Brand:</b> ${item.brand}</span>
-            <span class="label"><b>Type:</b> ${item.type}</span>
-            <span class="label"><b>Purchased:</b> ${item.purchaseDate}</span>
-            <div class="badge ${item.reusable ? 'status-ok' : 'status-pending'}">
-                ${item.reusable ? 'REUSABLE' : 'SINGLE USE'}
-            </div>
-        `;
-        container.appendChild(card);
-    });
-}
-
-function renderRepairs(data, container) {
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'repair-card';
-        card.innerHTML = `
-            <h3 style="font-size:1.1rem">${item.description}</h3>
-            <p class="repair-cost">${item.cost.toFixed(2)} €</p>
-            <span class="label"><b>Date:</b> ${item.repairDate}</span>
-            <span class="label"><b>Device ID:</b> #${item.deviceId}</span>
-            <div class="badge ${item.repair ? 'status-ok' : 'status-pending'}">
-                ${item.repair ? '✓ FINISHED' : '⟳ IN PROGRESS'}
-            </div>
-        `;
-        container.appendChild(card);
-    });
 }
