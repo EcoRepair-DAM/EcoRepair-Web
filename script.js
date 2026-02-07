@@ -1,9 +1,5 @@
-// CONFIGURACIÓN: true para Spring Boot, false para archivos JSON
-const useAPI = false; 
 
 const BASE_URL = "http://localhost:8080";
-const LOCAL_DEVICES = "devices.json"; 
-const LOCAL_REPAIRS = "repairs.json";
 
 let rawData = []; 
 let currentViewType = 'devices';
@@ -33,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadData('devices');
 });
 
-// Función para gestionar la clase CSS 'active' en el menú
+// Función para gestionar la clase CSS de los links en el menú
 function setActiveLink(event) {
     document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
@@ -61,15 +57,11 @@ async function loadData(type) {
     grid.innerHTML = "<p>Loading data...</p>";
 
     let url;
-    if (useAPI) {
-        url = BASE_URL + (type === 'devices' ? "/devices" : "/repairs");
-    } else {
-        url = type === 'devices' ? LOCAL_DEVICES : LOCAL_REPAIRS;
-    }
+    url = BASE_URL + (type === 'devices' ? "/devices" : "/repairs");
 
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error("Network response was not ok");
+        if (!response.ok) throw new Error("Network not response");
         rawData = await response.json();
         draw(); 
     } catch (error) {
