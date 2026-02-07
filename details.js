@@ -1,4 +1,4 @@
-const useAPI = false; // Mismo interruptor
+
 const BASE_URL = "http://localhost:8080";
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -9,16 +9,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         let device;
-        if (useAPI) {
-            // Llamada a endpoint individual de la API
-            const response = await fetch(`${BASE_URL}/devices/${selectedId}`);
-            device = await response.json();
-        } else {
-            // Llamada al JSON local y filtrado manual
-            const response = await fetch("devices.json");
-            const devices = await response.json();
-            device = devices.find(d => d.id == selectedId);
-        }
+        // Llamada a ela API
+        const response = await fetch(`${BASE_URL}/devices/${selectedId}`);
+        device = await response.json();
 
         if (device) {
             renderDetail(device, container);
